@@ -1,6 +1,54 @@
-<p>login works!</p>
-<h1>Welcome to the Application</h1>
-<nav>
-  <a routerLink="/login">Login</a>
-  <a routerLink="/dashboard">Dashboard</a>
-</nav>
+<div class="login-container">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+    <div class="card">
+      <div class="card-header">
+        <h2>Login</h2>
+      </div>
+      <div class="card-content">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            placeholder="Enter your email"
+          />
+          <div
+            class="error"
+            *ngIf="loginForm.get('email')?.hasError('required')"
+          >
+            Email is required
+          </div>
+          <div class="error" *ngIf="loginForm.get('email')?.hasError('email')">
+            Please enter a valid email
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            id="password"
+            type="password"
+            formControlName="password"
+            placeholder="Enter your password"
+          />
+          <div
+            class="error"
+            *ngIf="loginForm.get('password')?.hasError('required')"
+          >
+            Password is required
+          </div>
+          <div
+            class="error"
+            *ngIf="loginForm.get('password')?.hasError('minlength')"
+          >
+            Minimum 6 characters
+          </div>
+        </div>
+      </div>
+      <div class="card-actions">
+        <button type="submit">Login</button>
+      </div>
+    </div>
+  </form>
+</div>
